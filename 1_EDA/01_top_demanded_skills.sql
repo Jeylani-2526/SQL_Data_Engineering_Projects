@@ -1,0 +1,34 @@
+SELECT 
+    sd.skills,
+    count(jpf.*) as demand_count
+FROM  job_postings_fact as jpf
+INNER JOIN skills_job_dim as sjd
+    ON jpf.job_id = sjd.job_id
+INNER JOIN skills_dim as sd
+    ON sjd.skill_id = sd.skill_id
+WHERE 
+    jpf.job_title_short = 'Data Engineer'
+GROUP BY sd.skills
+ORDER BY 
+    demand_count DESC
+LIMIT  10;
+
+/*
+┌────────────┬──────────────┐
+│   skills   │ demand_count │
+│  varchar   │    int64     │
+├────────────┼──────────────┤
+│ sql        │       233132 │
+│ python     │       224102 │
+│ aws        │       130205 │
+│ azure      │       128822 │
+│ spark      │       106904 │
+│ java       │        69657 │
+│ databricks │        63012 │
+│ snowflake  │        60379 │
+│ scala      │        57079 │
+│ kafka      │        56410 │
+└────────────┴──────────────┘
+  10 rows         2 columns
+
+  */

@@ -2,7 +2,9 @@ DROP SCHEMA IF EXISTS flat_mart CASCADE;
 
 -- Create the flat mart schema
 CREATE SCHEMA flat_mart;
+
 SELECT '=== Loading Flat Mart ===' AS info;
+
 CREATE OR REPLACE TABLE flat_mart.job_postings AS
 SELECT
     -- Fact table fields
